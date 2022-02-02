@@ -93,7 +93,7 @@ public class MatrixItTest {
 
     @Test
     public void when4ElAndHasNextFalse() {
-        int[][] in = {    {1}     };
+        int[][] in = {{1}};
         MatrixIt it = new MatrixIt(in);
         assertThat(it.next(), is(1));
         assertFalse(it.hasNext());
