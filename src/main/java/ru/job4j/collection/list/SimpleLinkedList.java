@@ -39,23 +39,11 @@ public class SimpleLinkedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        Objects.checkIndex(index, size);
-        Node<E> rsl;
-        if (index == 0) {
-            return first.item;
-        } else if (index == size) {
-            return last.item;
-        }
-        if (index > size / 2) {
-            rsl = first;
-            for (int i = 0; i < index; i++) {
-                rsl = rsl.next;
-            }
-        } else {
-            rsl = last;
-            for (int i = size - 1; i > index; i--) {
-                rsl = rsl.prev;
-            }
+        Node<E> rsl = first;
+        int count = 0;
+        while (Objects.checkIndex(index, size) != count) {
+            rsl = rsl.next;
+            count++;
         }
         return rsl.item;
     }
