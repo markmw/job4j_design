@@ -39,9 +39,10 @@ public class SimpleLinkedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
+        Objects.checkIndex(index, size);
         Node<E> rsl = first;
         int count = 0;
-        while (Objects.checkIndex(index, size) != count) {
+        while (count != index) {
             rsl = rsl.next;
             count++;
         }
