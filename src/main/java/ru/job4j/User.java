@@ -29,10 +29,5 @@ public class User {
             System.out.printf("key: %s, value: %s \n", obj.getKey(), obj.getValue());
         }
 
-        Iterator<Map.Entry<User, Object>> iterator = map.entrySet().iterator();
-        User key = iterator.next().getKey();
-        User key1 = iterator.next().getKey();
-        System.out.println(key.equals(key1));
-        System.out.println("hash:" + key.hashCode() + " hash1: " + key1.hashCode());
     }
 }
