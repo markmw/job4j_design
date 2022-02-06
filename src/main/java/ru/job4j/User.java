@@ -28,6 +28,5 @@ public class User {
         for (Map.Entry<User, Object> obj : map.entrySet()) {
             System.out.printf("key: %s, value: %s \n", obj.getKey(), obj.getValue());
         }
-
     }
 }
