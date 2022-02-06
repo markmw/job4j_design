@@ -1,6 +1,9 @@
 package ru.job4j;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class User {
     private String name;
@@ -11,5 +14,25 @@ public class User {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
+    }
+
+    public static void main(String[] args) {
+        Calendar birthday = Calendar.getInstance();
+        User user = new User("Petr", 1, birthday);
+        User user1 = new User("Petr", 1, birthday);
+
+        Map<User, Object> map = new HashMap<User, Object>();
+        map.put(user, new Object());
+        map.put(user1, new Object());
+
+        for (Map.Entry<User, Object> obj : map.entrySet()) {
+            System.out.printf("key: %s, value: %s \n", obj.getKey(), obj.getValue());
+        }
+
+        Iterator<Map.Entry<User, Object>> iterator = map.entrySet().iterator();
+        User key = iterator.next().getKey();
+        User key1 = iterator.next().getKey();
+        System.out.println(key.equals(key1));
+        System.out.println("hash:" + key.hashCode() + " hash1: " + key1.hashCode());
     }
 }
