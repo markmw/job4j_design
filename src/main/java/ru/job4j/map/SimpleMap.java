@@ -13,11 +13,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean put(K key, V value) {
-        if ((float) count / table.length >= LOAD_FACTOR) {
+        if ((float) count / capacity >= LOAD_FACTOR) {
             expand();
         }
         boolean rsl = false;
-        int i = indexFor(hash(key), table.length);
+        int i = indexFor(hash(key), capacity);
         if (table[i] == null) {
             table[i] = new MapEntry<>(key, value);
             count++;
@@ -32,32 +32,32 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return hk == 0 ? 0 : hk ^ (hk >>> 16);
     }
 
-    private int indexFor(int hash, int size) {
-        return hash & (size - 1);
+    private int indexFor(int hash, int capacity) {
+        return hash & (capacity - 1);
     }
 
     private void expand() {
-        int newSize = getCapacity() * 2;
+        int newSize = capacity * 2;
         MapEntry<K, V>[] temp = new MapEntry[newSize];
         for (MapEntry<K, V> node : table) {
             if (node != null) {
                 temp[indexFor(hash(node.getKey()), newSize)] = node;
             }
         }
-        this.table = temp;
+        table = temp;
         this.capacity = newSize;
     }
 
     @Override
     public V get(K key) {
-        int i = indexFor(hash(key), table.length);
+        int i = indexFor(hash(key), capacity);
         return table[i] == null || !table[i].getKey().equals(key) ? null : table[i].getValue();
     }
 
     @Override
     public boolean remove(K key) {
         boolean rsl = true;
-        int i = indexFor(hash(key), table.length);
+        int i = indexFor(hash(key), capacity);
         if (table[i] == null || !table[i].getKey().equals(key)) {
             rsl = false;
         } else {
@@ -97,10 +97,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 return storage[cursor++].getKey();
             }
         };
-    }
-
-    public int getCapacity() {
-        return capacity;
     }
 
     private static class MapEntry<K, V> {
