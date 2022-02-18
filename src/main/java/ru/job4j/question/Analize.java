@@ -13,13 +13,14 @@ public class Analize {
         Map<Integer, String> currentMap = current.stream()
                 .collect(Collectors.toMap(User::getId, User::getName));
         for (User user : previous) {
-            if (currentMap.get(user.getId()) == null) {
+            String currentName = currentMap.get(user.getId());
+            if (currentName == null) {
                 deleted += 1;
             }
-            boolean rsl = currentMap.get(user.getId()) != null
-                    && !Objects.equals(currentMap.get(user.getId()), user.getName());
-            boolean rsl1 = currentMap.get(user.getId()) != null
-                    && Objects.equals(currentMap.get(user.getId()), user.getName());
+            boolean rsl = currentName != null
+                    && !Objects.equals(currentName, user.getName());
+            boolean rsl1 = currentName != null
+                    && Objects.equals(currentName, user.getName());
             if (rsl) {
                 changed += 1;
                 currentMap.remove(user.getId());
