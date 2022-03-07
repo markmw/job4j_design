@@ -18,7 +18,6 @@ public class ResultFile {
     public static void main(String[] args) {
         try (FileOutputStream out = new FileOutputStream("/Users/adletbaitorynov/Downloads/result.txt")) {
             out.write(multiple(10).getBytes());
-            out.write(System.lineSeparator().getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }
