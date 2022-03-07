@@ -17,6 +17,15 @@ public class LogFilter {
         return rsl;
     }
 
+    public static void save(List<String> log, String file) {
+        try (PrintWriter out = new PrintWriter(
+                new BufferedOutputStream(new FileOutputStream(file)))) {
+            out.println(log);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         LogFilter logFilter = new LogFilter();
         List<String> log = logFilter.filter("/Users/adletbaitorynov/Downloads/log.txt");
@@ -24,5 +33,6 @@ public class LogFilter {
         for (String line : lines) {
             System.out.println(line);
         }
+        save(log, "/Users/adletbaitorynov/Downloads/filterLog.txt");
     }
 }
