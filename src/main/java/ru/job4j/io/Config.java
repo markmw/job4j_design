@@ -18,7 +18,7 @@ public class Config {
     public void load() {
         try (BufferedReader in = new BufferedReader(new FileReader(this.path))) {
             in.lines()
-                    .filter(line -> !line.isEmpty() && !line.contains("# "))
+                    .filter(line -> !line.isEmpty() && !line.contains("#"))
                     .forEach(line -> {
                         String[] el = line.split("=");
                         if (el.length != 2) {
@@ -32,9 +32,6 @@ public class Config {
     }
 
     public String value(String key) {
-        if (values.get(key) == null) {
-            throw new UnsupportedOperationException("Don't impl this method yet!");
-        }
         return values.get(key);
     }
 
