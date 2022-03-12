@@ -10,7 +10,7 @@ public class ConfigTest {
         String path = "./data/pair_without_comment.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("name"), is("Petr Arsentev"));
+        assertEquals("Petr Arsentev", config.value("name"));
         assertNull(config.value("surname"));
     }
 
@@ -30,5 +30,21 @@ public class ConfigTest {
         String path = "./data/pair_with_exception.properties";
         Config config = new Config(path);
         config.load();
+    }
+
+    @Test
+    public void whenKeyIsMissing() {
+        String path = "./data/key_is_missing.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value(""), is("value"));
+    }
+
+    @Test
+    public void whenPairTwoEqualsSymbols() {
+        String path = "./data/pair_two_equals_symbols.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("key"), is("value"));
     }
 }
