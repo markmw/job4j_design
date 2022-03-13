@@ -1,9 +1,6 @@
 package ru.job4j.io;
 
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Stack;
 
 public class Analizy {
@@ -24,8 +21,8 @@ public class Analizy {
                         }
                     });
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException ie) {
+            ie.printStackTrace();
         }
     }
 
