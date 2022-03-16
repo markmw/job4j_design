@@ -16,7 +16,7 @@ public class ArgsName {
         }
         for (String el : args) {
             String[] pair = el.split("=", 2);
-            if (pair.length != 2 || pair[0].trim().isEmpty() || pair[1].trim().isEmpty()) {
+            if (pair.length != 2 || !pair[0].startsWith("-") || pair[1].trim().isEmpty()) {
                 throw new IllegalArgumentException("Invalid argument format. Required format - '-key=value'");
             }
             values.put(pair[0].substring(1), pair[1]);
