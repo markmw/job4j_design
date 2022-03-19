@@ -19,23 +19,20 @@ public class Zip {
                     zip.write(out.readAllBytes());
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException ie) {
+            ie.printStackTrace();
         }
     }
 
-    public void packSingleFile(File source, File target) {
-        try (ZipOutputStream zip = new ZipOutputStream(
-                new BufferedOutputStream(new FileOutputStream(target))
-        )) {
-            zip.putNextEntry(new ZipEntry(source.getPath()));
-            try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
-                zip.write(out.readAllBytes());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static void validate(File directory, String symbol) {
+        if (!directory.isDirectory()) {
+            throw new IllegalArgumentException("Not directory");
+        }
+        if (!symbol.startsWith(".")) {
+            throw new IllegalArgumentException("Extension must start with a dot '.'");
         }
     }
+
 
     public static void main(String[] args) throws IOException {
         ArgsName argZip = ArgsName.of(args);
@@ -43,12 +40,7 @@ public class Zip {
         String targetPath = argZip.get("o");
         String symbol = argZip.get("e");
         File directory = source.toFile();
-        if (!directory.isDirectory()) {
-            throw new IllegalArgumentException("Not directory");
-        }
-        if (!symbol.startsWith(".")) {
-            throw new IllegalArgumentException("Extension must start with a dot '.'");
-        }
+        validate(directory, symbol);
         List<Path> sources = Search.search(source, i -> !i.toFile().getName().endsWith(symbol));
         File target = new File(targetPath);
         packFiles(sources, target);
