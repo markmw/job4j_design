@@ -24,6 +24,7 @@ public class ConsoleChat {
         Scanner scanner = new Scanner(System.in);
         List<String> log = new ArrayList<>();
         String question = scanner.nextLine();
+        List<String> list = readPhrases();
         log.add(question);
         while (!OUT.equals(question)) {
             if (STOP.equals(question)) {
@@ -31,13 +32,11 @@ public class ConsoleChat {
                     question = scanner.nextLine();
                     log.add(question);
                 }
-            } else {
-                List<String> list = readPhrases();
-                int i = ThreadLocalRandom.current().nextInt(0, list.size());
-                String answer = list.get(i);
-                System.out.println(answer);
-                log.add(answer);
             }
+            int i = ThreadLocalRandom.current().nextInt(0, list.size());
+            String answer = list.get(i);
+            System.out.println(answer);
+            log.add(answer);
             question = scanner.nextLine();
             log.add(question);
         }
