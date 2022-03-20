@@ -9,6 +9,9 @@ public class CSVReader {
     public static void handle(ArgsName argsName) {
         List<String[]> list = new ArrayList<>();
         String delimiter = argsName.get("delimiter");
+        if (!delimiter.equals(";")) {
+            throw new IllegalArgumentException("Haven't one of needed arguments.");
+        }
         try (Scanner scanner = new Scanner(
                 new FileInputStream(argsName.get("path")), StandardCharsets.UTF_8)
                 .useDelimiter(delimiter + "|" + System.lineSeparator());
