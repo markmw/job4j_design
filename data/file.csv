@@ -1,0 +1,4 @@
+name;age;birthDate;education;children
+Mary;32;11.01.1990;true;2
+Addy;24;14.02.1998;false;1
+Scott;11;02.01.2011;true;0 
