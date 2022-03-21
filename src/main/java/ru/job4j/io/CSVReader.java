@@ -9,9 +9,6 @@ public class CSVReader {
     public static void handle(ArgsName argsName) {
         List<String[]> list = new ArrayList<>();
         String delimiter = argsName.get("delimiter");
-        if (!delimiter.equals(";")) {
-            throw new IllegalArgumentException("Haven't one of needed arguments.");
-        }
         try (Scanner scanner = new Scanner(
                 new FileInputStream(argsName.get("path")), StandardCharsets.UTF_8)
                 .useDelimiter(delimiter + "|" + System.lineSeparator());
@@ -37,9 +34,13 @@ public class CSVReader {
         }
     }
 
-    public static void validate(Path path) {
+    private static void validate(Path path, String delimiter) {
         if (!path.toFile().exists() || !path.toFile().isFile()) {
             throw new IllegalArgumentException("Path doesn't exist or not file");
+        }
+        String dm = ";";
+        if (!dm.equals(delimiter)) {
+            throw new IllegalArgumentException("Haven't one of needed arguments.");
         }
     }
 
@@ -51,7 +52,8 @@ public class CSVReader {
             );
         }
         Path path = Path.of(argsName.get("path"));
-        validate(path);
+        String delimiter = ";";
+        validate(path, delimiter);
         handle(argsName);
     }
 }
