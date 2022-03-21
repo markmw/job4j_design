@@ -2,11 +2,11 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.*;
 
 public class CSVReader {
     public static void handle(ArgsName argsName) {
+        validate(argsName);
         List<String[]> list = new ArrayList<>();
         String delimiter = argsName.get("delimiter");
         try (Scanner scanner = new Scanner(
@@ -34,12 +34,11 @@ public class CSVReader {
         }
     }
 
-    private static void validate(Path path, String delimiter) {
-        if (!path.toFile().exists() || !path.toFile().isFile()) {
+    private static void validate(ArgsName argsName) {
+        if (!new File(argsName.get("path")).exists() || !argsName.get("path").endsWith(".csv")) {
             throw new IllegalArgumentException("Path doesn't exist or not file");
         }
-        String dm = ";";
-        if (!dm.equals(delimiter)) {
+        if (!";".equals(argsName.get("delimiter"))) {
             throw new IllegalArgumentException("Haven't one of needed arguments.");
         }
     }
@@ -51,9 +50,6 @@ public class CSVReader {
                     "Root folder is null. Usage java -jar CSVReader.jar ROOT_FOLDER."
             );
         }
-        Path path = Path.of(argsName.get("path"));
-        String delimiter = ";";
-        validate(path, delimiter);
         handle(argsName);
     }
 }
