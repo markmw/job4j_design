@@ -55,6 +55,5 @@ public class CSVReader {
         String delimiter = ";";
         validate(path, delimiter);
         handle(argsName);
-        123
     }
 }
