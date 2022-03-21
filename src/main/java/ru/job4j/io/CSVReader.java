@@ -47,7 +47,7 @@ public class CSVReader {
         ArgsName argsName = ArgsName.of(args);
         if (args.length != 4) {
             throw new IllegalArgumentException(
-                    "Root folder is null. Usage java -jar CSVReader.jar ROOT_FOLDER."
+                    "Invalid arguments. Required format - '-path= -delimiter= -out= -filter='"
             );
         }
         handle(argsName);
