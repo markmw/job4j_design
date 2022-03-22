@@ -15,6 +15,7 @@ public class UsageLog4j {
         char charVar = 'A';
         short shortVar = 123;
         byte byteVar = 123;
+        long longVar = 1233333333333333L;
         LOG.debug(
                 "User info name: {}, "
                         + "age: {}, "
@@ -23,7 +24,8 @@ public class UsageLog4j {
                         + "bool: {}, "
                         + "charVar: {}, "
                         + "shortVar: {}, "
-                        + "byteVar: {}",
-                name, age, floatVar, doubleVar, bool, charVar, shortVar, byteVar);
+                        + "byteVar: {} "
+                        + "longVar: {}",
+                name, age, floatVar, doubleVar, bool, charVar, shortVar, byteVar, longVar);
     }
 }
