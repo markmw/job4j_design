@@ -34,12 +34,12 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Person{"
-                + "sex=" + status
-                + "name=" + name
+        return "Employee{"
+                + "status=" + status
+                + ", name=" + name
                 + ", age=" + age
-                + ", contact=" + department
-                + ", statuses=" + Arrays.toString(duties)
+                + ", department=" + department
+                + ", duties=" + Arrays.toString(duties)
                 + '}';
     }
 

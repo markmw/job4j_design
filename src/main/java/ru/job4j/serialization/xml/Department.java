@@ -17,8 +17,8 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Contact{"
-                + "phone='" + name + '\''
+        return "Department{"
+                + "name='" + name + '\''
                 + '}';
     }
 }
