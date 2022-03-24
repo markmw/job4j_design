@@ -27,4 +27,24 @@ public class Employee {
                 + ", duties=" + Arrays.toString(duties)
                 + '}';
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public String[] getDuties() {
+        return duties;
+    }
 }
