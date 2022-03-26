@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class Finder {
-    private ArgsName find;
+    private final ArgsName find;
 
     public Finder(String[] args) {
         this.find = ArgsName.of(args);
@@ -23,7 +23,8 @@ public class Finder {
     private Predicate<Path> searchType(String name, String type) {
         Predicate<Path> condition = null;
         if ("mask".equals(type)) {
-            condition = p -> p.toFile().getName().endsWith(name.substring(1));
+            condition = p -> p.toFile().getName().matches(
+                    name.replace("?", ".").replace("*", ".*"));
         } else if ("name".equals(type)) {
             condition = p -> p.toFile().getName().equals(name);
         } else if ("regex".equals(type)) {
