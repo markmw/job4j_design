@@ -24,7 +24,10 @@ public class Finder {
         Predicate<Path> condition = null;
         if ("mask".equals(type)) {
             condition = p -> p.toFile().getName().matches(
-                    name.replace("?", ".").replace("*", ".*"));
+                    name.replace(".", "[.]")
+                            .replace("?", ".")
+                            .replace("*", ".*")
+                            .replace("^", "$"));
         } else if ("name".equals(type)) {
             condition = p -> p.toFile().getName().equals(name);
         } else if ("regex".equals(type)) {

@@ -1,5 +1,0 @@
-./data/key_is_missing.properties
-./data/app.properties
-./data/pair_two_equals_symbols.properties
-./data/pair_without_comment.properties
-./data/pair_with_exception.properties
