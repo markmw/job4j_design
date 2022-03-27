@@ -24,9 +24,11 @@ public class Finder {
     private Predicate<Path> searchType(String name, String type) {
         Predicate<Path> condition = null;
         if ("mask".equals(type)) {
-            condition = path -> FileSystems.getDefault()
-                    .getPathMatcher("glob:" + name)
-                    .matches(path.getFileName());
+            condition = p -> p.toFile().getName()
+                    .matches("^" + (name
+                            .replace(".", "[.]")
+                            .replace("?", ".")
+                            .replace("*", ".*")) + "$");
         } else if ("name".equals(type)) {
             condition = p -> p.toFile().getName().equals(name);
         } else if ("regex".equals(type)) {
