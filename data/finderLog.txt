@@ -1,0 +1,2 @@
+./data/finderLog.txt
+./data/bot_answer.txt
