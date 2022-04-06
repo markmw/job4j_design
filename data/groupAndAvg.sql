@@ -36,7 +36,7 @@ inner join devices_people dp on d.id=dp.device_id
 inner join people p on p.id=dp.people_id
 group by dp.people_id, p.name;
 
-elect p.name, avg(d.price) from devices d
+select p.name, avg(d.price) from devices d
 inner join devices_people dp on d.id=dp.device_id
 inner join people p on p.id=dp.people_id
 group by dp.people_id, p.name
