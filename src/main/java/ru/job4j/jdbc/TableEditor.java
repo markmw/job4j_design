@@ -46,9 +46,8 @@ public class TableEditor implements AutoCloseable {
 
     public void createTable(String tableName) throws Exception {
         String query = String.format(
-                "CREATE TABLE IF NOT EXISTS " + tableName + "(%s, %s);",
-                "id serial PRIMARY KEY",
-                "name text"
+                "CREATE TABLE IF NOT EXISTS " + tableName + "(%s);",
+                "id serial PRIMARY KEY"
         );
         execute(query, tableName);
     }
@@ -100,8 +99,8 @@ public class TableEditor implements AutoCloseable {
 
     public static void main(String[] args) throws Exception {
         Properties properties = new Properties();
-        String path = "./data/app.properties";
         try {
+            String path = "./data/app.properties";
             FileInputStream in = new FileInputStream(path);
             properties.load(in);
             TableEditor tableEditor = new TableEditor(properties);
