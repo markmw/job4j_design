@@ -2,6 +2,7 @@ package ru.job4j.jdbc;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -45,35 +46,28 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) throws Exception {
-        String query = String.format(
-                "CREATE TABLE IF NOT EXISTS " + tableName + "(%s);",
-                "id serial PRIMARY KEY"
-        );
+        String query = String.format("CREATE TABLE IF NOT EXISTS %s();", tableName);
         execute(query, tableName);
     }
 
     public void dropTable(String tableName) throws Exception {
-        String query = String.format("DROP TABLE IF EXISTS " + tableName);
+        String query = String.format("DROP TABLE IF EXISTS %s;", tableName);
         execute(query);
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
-        String query = String.format(
-                "ALTER TABLE " + tableName + " add column " + columnName + " " + type
-        );
+        String query = String.format("ALTER TABLE %s ADD COLUMN %s %s;", tableName, columnName, type);
         execute(query, tableName);
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-        String query = String.format("ALTER TABLE " + tableName + " DROP COLUMN " + columnName);
+        String query = String.format("ALTER TABLE %s DROP COLUMN %s;", tableName, columnName);
         execute(query, tableName);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
         String query = String.format(
-                "ALTER TABLE " + tableName
-                        + " rename column " + columnName
-                        + " to " + newColumnName
+                "ALTER TABLE %s rename COLUMN %s to %s;", tableName, columnName, newColumnName
         );
         execute(query, tableName);
     }
@@ -99,9 +93,7 @@ public class TableEditor implements AutoCloseable {
 
     public static void main(String[] args) throws Exception {
         Properties properties = new Properties();
-        try {
-            String path = "./data/app.properties";
-            FileInputStream in = new FileInputStream(path);
+        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
             properties.load(in);
             TableEditor tableEditor = new TableEditor(properties);
             tableEditor.createTable("demo_table");
